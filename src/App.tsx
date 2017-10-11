@@ -4,6 +4,8 @@ import DeleteIcon from 'material-ui-icons/Delete';
 
 import { withStyles, WithStyles } from 'material-ui/styles';
 
+import RaisedButtonsSample from './components/RaisedButtonsSample';
+
 const styles = {
   box: {
     margin: 10,
@@ -42,35 +44,6 @@ const FlatButtonsSample = withStyles(styles)<FlatButtonsProps>(
   }
 );
 
-interface RaisedButtonsProps {
-  onClick: () => void;
-}
-
-class RaisedButtonsSample extends React.Component<RaisedButtonsProps & WithStyles<ClassNames>, {}> {
-  render() {
-    const classes = this.props.classes;
-    return (
-      <div className={classes.box}>
-        <Button raised={true} onClick={this.props.onClick} className={classes.buttonWithHover}>Default</Button>
-        <Button raised={true} color="primary" className={classes.button}>Primary</Button>
-        <Button raised={true} color="accent" className={classes.button}><DeleteIcon />削除</Button>
-      </div>
-    );
-  }
-}
-
-// 1ファイル内で書くためにHOCを変数に入れておく
-const HocRaisedButtonsSample = withStyles(styles)<RaisedButtonsProps>(RaisedButtonsSample);
-
-// 通常は別ファイルにするので、その場合は以下のようにexportする
-// export default withStyles(styles)<RaisedButtonsProps>(RaisedButtonsSample);
-
-// withStylesに型注釈が必要な場合は、以下のようにする
-// export default withStyles<{} & ClassNames>(styles)<RaisedButtonsProps>(RaisedButtonsSample);
-
-// そして別ファイルでimport
-// import RaisedButtonsSample from "./components/RaisedButtonsSample.tsx";
-
 class App extends React.Component {
   handleClick = () => {
     alert('Clicked!');
@@ -81,7 +54,7 @@ class App extends React.Component {
       <div>
 
         <FlatButtonsSample onClick={this.handleClick} />
-        <HocRaisedButtonsSample onClick={this.handleClick} />
+        <RaisedButtonsSample onClick={this.handleClick} />
       </div>
     );
   }
